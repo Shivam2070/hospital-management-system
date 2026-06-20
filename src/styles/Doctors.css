@@ -1,0 +1,248 @@
+.doctors-section {
+  padding: 60px 60px;
+  background: #f4f8fb;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+/* ── Header ── */
+.doctors-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.doctors-eyebrow {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #3db8d4;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 0 0 8px;
+}
+
+.doctors-title {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #1a2340;
+  margin: 0 0 10px;
+  letter-spacing: -0.4px;
+}
+
+.doctors-subtitle {
+  font-size: 0.88rem;
+  color: #5a6480;
+  margin: 0;
+}
+
+/* ── Grid ── */
+.doctors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+/* ── Card ── */
+.doctor-card {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1.5px solid #e0eef4;
+  padding: 24px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.doctor-card.hovered {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(61, 184, 212, 0.18);
+  border-color: #5aaec4;
+}
+
+/* ── Availability badge ── */
+.availability-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 50px;
+}
+
+.availability-badge.available {
+  background: #e6f9f0;
+  color: #1a9e6a;
+}
+
+.availability-badge.unavailable {
+  background: #fef0f0;
+  color: #e05353;
+}
+
+.badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.available .badge-dot {
+  background: #2dc78a;
+}
+
+.unavailable .badge-dot {
+  background: #e05353;
+}
+
+/* ── Photo ── */
+.doctor-img-wrap {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 3px solid #daeef5;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.doctor-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Info ── */
+.doctor-info {
+  text-align: center;
+  width: 100%;
+}
+
+.doctor-name-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.doctor-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1a2340;
+  margin: 0;
+}
+
+.verified-icon {
+  color: #3db8d4;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.doctor-specialty {
+  font-size: 0.82rem;
+  color: #3db8d4;
+  font-weight: 600;
+  margin: 0 0 3px;
+}
+
+.doctor-experience {
+  font-size: 0.78rem;
+  color: #5a6480;
+  margin: 0 0 10px;
+}
+
+/* ── Stars ── */
+.doctor-rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.star {
+  font-size: 0.75rem;
+}
+
+.star.filled,
+.star.half {
+  color: #f5a623;
+}
+
+.star.empty {
+  color: #d0d8e4;
+}
+
+.rating-value {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #1a2340;
+}
+
+.rating-reviews {
+  font-size: 0.75rem;
+  color: #5a6480;
+}
+
+/* ── Book button ── */
+.book-btn {
+  width: 100%;
+  padding: 10px;
+  background: #3db8d4;
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.book-btn:hover {
+  background: #2da8c4;
+  transform: translateY(-1px);
+}
+
+/* ── Footer ── */
+.doctors-footer {
+  text-align: center;
+}
+
+.view-all-btn {
+  padding: 12px 36px;
+  background: transparent;
+  color: #3db8d4;
+  border: 2px solid #3db8d4;
+  border-radius: 50px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.view-all-btn:hover {
+  background: #3db8d4;
+  color: #ffffff;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .doctors-section {
+    padding: 40px 20px;
+  }
+  .doctors-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+  }
+}

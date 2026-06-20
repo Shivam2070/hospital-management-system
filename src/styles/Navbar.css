@@ -1,0 +1,369 @@
+/* ── Base navbar ── */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: #1a6fbd;
+  transition: background 0.3s, box-shadow 0.3s;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.navbar.scrolled {
+  background: #155fa0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 68px;
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* ── Logo ── */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.navbar-logo-icon {
+  font-size: 1.8rem;
+  color: #ffffff;
+}
+
+.navbar-logo span {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+}
+
+/* ── Desktop links ── */
+.navbar-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 32px;
+}
+
+.navbar-link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.88);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.navbar-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #ffffff;
+  border-radius: 2px;
+  transition: width 0.25s;
+}
+
+.navbar-link:hover {
+  color: #ffffff;
+}
+
+.navbar-link:hover::after {
+  width: 100%;
+}
+
+/* ── Desktop action buttons ── */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.navbar-btn-outline {
+  padding: 8px 16px;
+  border-radius: 50px;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: transparent;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.navbar-btn-outline:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #ffffff;
+}
+
+.navbar-btn-filled {
+  padding: 8px 16px;
+  border-radius: 50px;
+  background: #ffffff;
+  color: #1a6fbd;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  white-space: nowrap;
+}
+
+.navbar-btn-filled:hover {
+  background: #e8f4fd;
+  transform: translateY(-1px);
+}
+
+/* ── Hamburger button ── */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: transform 0.2s;
+}
+
+.hamburger:hover {
+  transform: scale(1.1);
+}
+
+/* ── Mobile overlay ── */
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1100;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.mobile-overlay.open {
+  display: block;
+  opacity: 1;
+}
+
+/* ── Mobile drawer ── */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 280px;
+  height: 100vh;
+  background: #ffffff;
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.3s ease;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+}
+
+.mobile-menu.open {
+  right: 0;
+}
+
+/* ── Drawer header ── */
+.mobile-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  background: #1a6fbd;
+  flex-shrink: 0;
+}
+
+.mobile-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mobile-logo span {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.mobile-close {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.6rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 2px;
+}
+
+/* ── Drawer links ── */
+.mobile-links {
+  list-style: none;
+  padding: 16px 0;
+  margin: 0;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.mobile-link {
+  display: block;
+  padding: 14px 24px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #1a2340;
+  text-decoration: none;
+  border-bottom: 1px solid #f0f4f8;
+  transition: background 0.15s, color 0.15s, padding-left 0.2s;
+}
+
+.mobile-link:hover {
+  background: #f0f8fc;
+  color: #1a6fbd;
+  padding-left: 30px;
+}
+
+/* ── Drawer CTA ── */
+.mobile-actions {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-top: 1px solid #e8edf5;
+  flex-shrink: 0;
+}
+
+.w-full {
+  width: 100%;
+  text-align: center;
+  display: block;
+  box-sizing: border-box;
+}
+
+.mobile-actions .navbar-btn-outline {
+  border-color: #1a6fbd;
+  color: #1a6fbd;
+  padding: 11px 20px;
+}
+
+.mobile-actions .navbar-btn-outline:hover {
+  background: #f0f8fc;
+}
+
+.mobile-actions .navbar-btn-filled {
+  background: #1a6fbd;
+  color: #ffffff;
+  padding: 11px 20px;
+}
+
+.mobile-actions .navbar-btn-filled:hover {
+  background: #155fa0;
+}
+
+.active-link {
+  color: #ffffff !important;
+}
+
+.active-link::after {
+  width: 100% !important;
+}
+
+.mobile-link-active {
+  color: #1a6fbd !important;
+  background: #f0f8fc !important;
+  padding-left: 30px !important;
+  font-weight: 700 !important;
+}
+
+/* ── User avatar + name ── */
+.navbar-username {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.navbar-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+/* ── Logout button ── */
+.navbar-btn-logout {
+  padding: 7px 16px;
+  border-radius: 50px;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  white-space: nowrap;
+}
+
+.navbar-btn-logout:hover {
+  background: rgba(255, 0, 0, 0.2);
+  border-color: #ff6b6b;
+  color: #ffffff;
+}
+
+/* ── Responsive ── */
+@media (max-width: 992px) {
+  .navbar-inner {
+    padding: 0 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-links,
+  .navbar-actions {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .navbar-inner {
+    padding: 0 20px;
+  }
+}
