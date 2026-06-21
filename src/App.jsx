@@ -12,6 +12,7 @@ import Login from './components/Login'
 import AdminLogin from './components/AdminLogin'
 import AdminDashboard from './components/AdminDashboard'
 import SymptomChecker from './components/SymptomChecker'
+import Chatbot from './components/Chatbot'
 import './App.css'
 
 const Home = () => (
@@ -42,6 +43,7 @@ function App() {
           <Route path="/symptom-checker" element={<SymptomChecker />} />
         </Routes>
       </div>
+      <Chatbot />
       <Footer />
     </>
   )
