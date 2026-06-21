@@ -3,54 +3,55 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const apiKey = process.env.CLAUDE_API_KEY
-  console.log('API Key exists:', !!apiKey)
-  console.log('API Key start:', apiKey ? apiKey.substring(0, 10) : 'MISSING')
-
   const { symptoms } = req.body
-  console.log('Symptoms received:', symptoms)
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 1000,
-        messages: [{
-          role: 'user',
-          content: `You are a medical assistant. Based on symptoms, suggest department from: Cardiology, Neurology, Urology, Pulmonology, Dentistry, Orthopedics.
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{
+            parts: [{
+              text: `You are a medical assistant for HMS Hospital. Based on the symptoms provided, suggest the most appropriate department from this list only: Cardiology, Neurology, Urology, Pulmonology, Dentistry, Orthopedics.
 
 Symptoms: ${symptoms}
 
-Respond ONLY in this JSON format:
+Respond ONLY in this exact JSON format, nothing else, no extra text:
 {
-  "department": "department name",
+  "department": "department name from the list",
   "doctor": "doctor name",
-  "reason": "brief explanation",
+  "reason": "brief explanation in 1-2 sentences",
   "severity": "Low/Medium/High",
   "tips": ["tip1", "tip2", "tip3"]
 }
 
-Doctors: Cardiology=Dr. Sarah Johnson, Neurology=Dr. James Williams, Urology=Dr. Robert Wilson, Pulmonology=Dr. Emily Davis, Dentistry=Dr. Sophia Martinez, Orthopedics=Dr. Michael Brown`
-        }]
-      })
-    })
+Doctor mapping:
+Cardiology = Dr. Sarah Johnson
+Neurology = Dr. James Williams
+Urology = Dr. Robert Wilson
+Pulmonology = Dr. Emily Davis
+Dentistry = Dr. Sophia Martinez
+Orthopedics = Dr. Michael Brown`
+            }]
+          }],
+          generationConfig: {
+            temperature: 0.3,
+            maxOutputTokens: 1000,
+          }
+        })
+      }
+    )
 
-    const raw = await response.text()
-    console.log('Raw Claude response:', raw)
-
-    const data = JSON.parse(raw)
+    const data = await response.json()
+    console.log('Gemini response:', JSON.stringify(data))
 
     if (data.error) {
       return res.status(500).json({ error: data.error.message })
     }
 
-    const text = data.content[0].text
+    const text = data.candidates[0].content.parts[0].text
     const clean = text.replace(/```json|```/g, '').trim()
     const parsed = JSON.parse(clean)
     res.status(200).json(parsed)
