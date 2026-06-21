@@ -2,12 +2,12 @@ import { useState } from 'react'
 import '../styles/SearchBar.css'
 
 const doctorData = [
-  { name: 'Dr. Sarah Johnson', department: 'Cardiology',   location: 'New York',    available: ['Today', 'This Week', 'This Month'] },
-  { name: 'Dr. James Williams', department: 'Neurology',   location: 'Los Angeles', available: ['Tomorrow', 'This Week', 'This Month'] },
-  { name: 'Dr. Robert Wilson',  department: 'Urology',     location: 'Chicago',     available: ['Today', 'Tomorrow', 'This Week'] },
-  { name: 'Dr. Emily Davis',    department: 'Pulmonology', location: 'Houston',     available: ['This Week', 'This Month', 'Next Month'] },
-  { name: 'Dr. Sophia Martinez',department: 'Dentistry',   location: 'Phoenix',     available: ['Today', 'Tomorrow', 'Next Month'] },
-  { name: 'Dr. Michael Brown',  department: 'Orthopedics', location: 'New York',    available: ['Tomorrow', 'This Month', 'Next Month'] },
+  { name: 'Dr. Sarah Johnson',  department: 'Cardiology',   location: 'New York',    available: ['Today', 'This Week', 'This Month'] },
+  { name: 'Dr. James Williams', department: 'Neurology',    location: 'Los Angeles', available: ['Tomorrow', 'This Week', 'This Month'] },
+  { name: 'Dr. Robert Wilson',  department: 'Urology',      location: 'Chicago',     available: ['Today', 'Tomorrow', 'This Week'] },
+  { name: 'Dr. Emily Davis',    department: 'Pulmonology',  location: 'Houston',     available: ['This Week', 'This Month', 'Next Month'] },
+  { name: 'Dr. Sophia Martinez',department: 'Dentistry',    location: 'Phoenix',     available: ['Today', 'Tomorrow', 'Next Month'] },
+  { name: 'Dr. Michael Brown',  department: 'Orthopedics',  location: 'New York',    available: ['Tomorrow', 'This Month', 'Next Month'] },
 ]
 
 const options = {
@@ -37,8 +37,8 @@ export default function SearchBar() {
   const [selected, setSelected] = useState({
     department: '', doctor: '', date: '', location: '',
   })
-  const [open, setOpen]       = useState(null)
-  const [results, setResults] = useState(null)
+  const [open, setOpen]         = useState(null)
+  const [results, setResults]   = useState(null)
   const [searched, setSearched] = useState(false)
 
   const toggle = (key) => setOpen(open === key ? null : key)
@@ -50,16 +50,10 @@ export default function SearchBar() {
 
   const handleSearch = () => {
     let filtered = doctorData
-
-    if (selected.department)
-      filtered = filtered.filter(d => d.department === selected.department)
-    if (selected.doctor)
-      filtered = filtered.filter(d => d.name === selected.doctor)
-    if (selected.date)
-      filtered = filtered.filter(d => d.available.includes(selected.date))
-    if (selected.location)
-      filtered = filtered.filter(d => d.location === selected.location)
-
+    if (selected.department) filtered = filtered.filter(d => d.department === selected.department)
+    if (selected.doctor)     filtered = filtered.filter(d => d.name === selected.doctor)
+    if (selected.date)       filtered = filtered.filter(d => d.available.includes(selected.date))
+    if (selected.location)   filtered = filtered.filter(d => d.location === selected.location)
     setResults(filtered)
     setSearched(true)
   }
@@ -82,10 +76,7 @@ export default function SearchBar() {
                 onClick={() => toggle(key)}
               >
                 <span>{selected[key] || label}</span>
-                <svg
-                  className={`chevron ${open === key ? 'rotate' : ''}`}
-                  width="12" height="12" viewBox="0 0 12 12" fill="none"
-                >
+                <svg className={`chevron ${open === key ? 'rotate' : ''}`} width="12" height="12" viewBox="0 0 12 12" fill="none">
                   <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
@@ -103,7 +94,6 @@ export default function SearchBar() {
                   ))}
                 </ul>
               )}
-
               <div className="divider" />
             </div>
           ))}
@@ -124,14 +114,8 @@ export default function SearchBar() {
       {searched && (
         <div className="search-results-section">
           <div className="search-results-header">
-            <h3>
-              {results.length > 0
-                ? `Found ${results.length} Doctor${results.length > 1 ? 's' : ''}`
-                : 'No doctors found'}
-            </h3>
-            <button className="search-clear-btn" onClick={handleClear}>
-              ✕ Clear Search
-            </button>
+            <h3>{results.length > 0 ? `Found ${results.length} Doctor${results.length > 1 ? 's' : ''}` : 'No doctors found'}</h3>
+            <button className="search-clear-btn" onClick={handleClear}>✕ Clear Search</button>
           </div>
 
           {results.length === 0 ? (
@@ -154,9 +138,7 @@ export default function SearchBar() {
                     <p className="search-doctor-location">📍 {doc.location}</p>
                     <p className="search-doctor-available">🗓 Available: {doc.available.join(', ')}</p>
                   </div>
-                  <a href="/appointments" className="search-book-btn">
-                    Book Now
-                  </a>
+                  <a href="/appointments" className="search-book-btn">Book Now</a>
                 </div>
               ))}
             </div>
