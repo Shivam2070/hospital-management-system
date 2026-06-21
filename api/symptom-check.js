@@ -6,6 +6,10 @@ export default async function handler(req, res) {
 
   const { symptoms } = req.body
 
+  if (!symptoms) {
+    return res.status(400).json({ error: 'Symptoms description is required' })
+  }
+
   try {
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
@@ -19,7 +23,7 @@ export default async function handler(req, res) {
 
 Symptoms: ${symptoms}
 
-Respond ONLY in this exact JSON format, nothing else, no extra text:
+Respond strictly using this JSON structure:
 {
   "department": "department name from the list",
   "doctor": "doctor name",
@@ -38,8 +42,9 @@ Orthopedics = Dr. Michael Brown`
             }]
           }],
           generationConfig: {
-            temperature: 0.3,
+            temperature: 0.1, // Dropped to 0.1 to make it follow formatting rules strictly
             maxOutputTokens: 1000,
+            responseMimeType: "application/json" // <-- Crucial: Forces Gemini to respond in clean, raw JSON
           }
         })
       }
@@ -52,9 +57,16 @@ Orthopedics = Dr. Michael Brown`
       return res.status(500).json({ error: data.error.message })
     }
 
+    // Safety check for candidates structure
+    if (!data.candidates || !data.candidates[0]?.content?.parts?.[0]?.text) {
+      throw new Error("Invalid response structural layout from Gemini API.")
+    }
+
     const text = data.candidates[0].content.parts[0].text
-    const clean = text.replace(/```json|```/g, '').trim()
-    const parsed = JSON.parse(clean)
+    
+    // Now parsing is entirely safe because markdown backticks are suppressed
+    const parsed = JSON.parse(text.trim())
+    
     res.status(200).json(parsed)
 
   } catch (err) {
