@@ -11,6 +11,7 @@ import Testimonials from './components/Testimonials'
 import Login from './components/Login'
 import AdminLogin from './components/AdminLogin'
 import AdminDashboard from './components/AdminDashboard'
+import SymptomChecker from './components/SymptomChecker'
 import './App.css'
 
 const Home = () => (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/symptom-checker" element={<SymptomChecker />} />
         </Routes>
       </div>
       <Footer />

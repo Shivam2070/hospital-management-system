@@ -61,9 +61,17 @@ export const heroContent = {
   doctorsOnlineLabel: 'Doctors Online',
 }
 
+// export const navLinks = [
+//   { label: 'Home',         href: '/'             },
+//   { label: 'Doctors',      href: '/doctors'       },
+//   { label: 'Departments',  href: '/departments'   },
+//   { label: 'Appointments', href: '/appointments'  },
+// ]
+
 export const navLinks = [
-  { label: 'Home',         href: '/'             },
-  { label: 'Doctors',      href: '/doctors'       },
-  { label: 'Departments',  href: '/departments'   },
-  { label: 'Appointments', href: '/appointments'  },
+  { label: 'Home',             href: '/'                 },
+  { label: 'Doctors',          href: '/doctors'          },
+  { label: 'Departments',      href: '/departments'      },
+  { label: 'Appointments',     href: '/appointments'     },
+  { label: '🤖 AI Checker',    href: '/symptom-checker'  },
 ]
