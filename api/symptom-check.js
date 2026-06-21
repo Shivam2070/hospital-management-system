@@ -10,7 +10,7 @@ export default async function handler(req, res) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': process.env.VITE_CLAUDE_API_KEY,
+        'x-api-key': process.env.CLAUDE_API_KEY,
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
@@ -45,12 +45,27 @@ Doctor mapping:
     })
 
     const data = await response.json()
+
+    // Log full response for debugging
+    console.log('Claude API response:', JSON.stringify(data))
+
+    if (data.error) {
+      console.error('Claude API error:', data.error)
+      return res.status(500).json({ error: data.error.message })
+    }
+
+    if (!data.content || !data.content[0]) {
+      console.error('Unexpected response structure:', data)
+      return res.status(500).json({ error: 'Unexpected API response' })
+    }
+
     const text = data.content[0].text
     const clean = text.replace(/```json|```/g, '').trim()
     const parsed = JSON.parse(clean)
     res.status(200).json(parsed)
+
   } catch (err) {
-    console.error(err)
-    res.status(500).json({ error: 'Failed to analyze symptoms' })
+    console.error('Handler error:', err)
+    res.status(500).json({ error: err.message })
   }
 }
