@@ -12,14 +12,12 @@ const doctorData = [
 
 const options = {
   department: ['Cardiology', 'Neurology', 'Urology', 'Pulmonology', 'Dentistry', 'Orthopedics'],
-  doctor:     ['Dr. Sarah Johnson', 'Dr. James Williams', 'Dr. Robert Wilson', 'Dr. Emily Davis', 'Dr. Sophia Martinez', 'Dr. Michael Brown'],
   date:       ['Today', 'Tomorrow', 'This Week', 'This Month', 'Next Month'],
   location:   ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix'],
 }
 
 const dropdowns = [
   { key: 'department', label: 'Select Department' },
-  { key: 'doctor',     label: 'Select Doctor'     },
   { key: 'date',       label: 'Select Date'       },
   { key: 'location',   label: 'Select Location'   },
 ]
@@ -35,7 +33,7 @@ const deptColors = {
 
 export default function SearchBar() {
   const [selected, setSelected] = useState({
-    department: '', doctor: '', date: '', location: '',
+    department: '', date: '', location: '',
   })
   const [open, setOpen]         = useState(null)
   const [results, setResults]   = useState(null)
@@ -59,7 +57,7 @@ export default function SearchBar() {
   }
 
   const handleClear = () => {
-    setSelected({ department: '', doctor: '', date: '', location: '' })
+    setSelected({ department: '', date: '', location: '' })
     setResults(null)
     setSearched(false)
   }
