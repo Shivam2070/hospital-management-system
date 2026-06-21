@@ -105,7 +105,7 @@ const Hero = () => {
           {/* Image frame */}
           <div className="hero-img-frame">
             <img
-              src="https://randomuser.me/api/portraits/women/44.jpg"
+              src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&q=80"
               alt="Doctor"
               className="hero-doctor-img"
             />
